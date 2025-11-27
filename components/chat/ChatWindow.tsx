@@ -29,7 +29,9 @@ export const ChatWindow = ({ currentUser, recipient, onBack }: ChatWindowProps) 
 
     const fetchMessages = async () => {
         try {
-            const res = await fetch(`/api/messages/${recipient._id}`);
+            const res = await fetch(`/api/messages/${recipient._id}`, {
+                credentials: 'include' // Include cookies for authentication
+            });
             if (res.ok) {
                 const data = await res.json();
                 setMessages(data);
@@ -48,6 +50,7 @@ export const ChatWindow = ({ currentUser, recipient, onBack }: ChatWindowProps) 
             const res = await fetch('/api/messages/send', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // Include cookies for authentication
                 body: JSON.stringify({
                     receiverId: recipient._id,
                     content: newMessage,
@@ -98,8 +101,8 @@ export const ChatWindow = ({ currentUser, recipient, onBack }: ChatWindowProps) 
                             <div key={msg._id} className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}>
                                 <div
                                     className={`max-w-[75%] rounded-2xl px-4 py-2.5 ${isMe
-                                            ? 'bg-black text-white rounded-tr-none'
-                                            : 'bg-white text-gray-900 rounded-tl-none shadow-sm'
+                                        ? 'bg-black text-white rounded-tr-none'
+                                        : 'bg-white text-gray-900 rounded-tl-none shadow-sm'
                                         }`}
                                 >
                                     <p className="text-sm">{msg.content}</p>

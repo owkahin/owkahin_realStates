@@ -50,6 +50,7 @@ export default function ExplorePage() {
         try {
             const res = await fetch(`/api/users/${targetUserId}/follow`, {
                 method: 'POST',
+                credentials: 'include', // Include cookies for authentication
             });
 
             if (res.ok) {
@@ -67,6 +68,7 @@ export default function ExplorePage() {
         try {
             const res = await fetch(`/api/users/${targetUserId}/unfollow`, {
                 method: 'POST',
+                credentials: 'include', // Include cookies for authentication
             });
 
             if (res.ok) {

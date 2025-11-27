@@ -57,6 +57,7 @@ export default function AddPropertyPage() {
 
             const uploadRes = await fetch('/api/upload', {
                 method: 'POST',
+                credentials: 'include', // Include cookies for authentication
                 body: uploadFormData,
             });
 
@@ -67,6 +68,7 @@ export default function AddPropertyPage() {
             const propertyRes = await fetch('/api/properties', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // Include cookies for authentication
                 body: JSON.stringify({
                     ...formData,
                     image: url,

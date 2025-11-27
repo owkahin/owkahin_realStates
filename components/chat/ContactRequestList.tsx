@@ -17,7 +17,9 @@ export const ContactRequestList = ({ currentUser, onRequestProcessed }: ContactR
 
     const fetchRequests = async () => {
         try {
-            const res = await fetch('/api/contact-requests');
+            const res = await fetch('/api/contact-requests', {
+                credentials: 'include' // Include cookies for authentication
+            });
             const data = await res.json();
             if (data.success) {
                 // Filter for received requests that are pending
@@ -38,6 +40,7 @@ export const ContactRequestList = ({ currentUser, onRequestProcessed }: ContactR
             const res = await fetch(`/api/contact-requests/${requestId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // Include cookies for authentication
                 body: JSON.stringify({ status: action })
             });
 

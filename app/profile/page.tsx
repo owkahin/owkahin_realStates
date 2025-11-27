@@ -51,6 +51,7 @@ export default function ProfilePage() {
             const res = await fetch(`/api/users/${user._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // Include cookies for authentication
                 body: JSON.stringify(data),
             });
 

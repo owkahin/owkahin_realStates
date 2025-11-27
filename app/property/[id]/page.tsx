@@ -155,6 +155,7 @@ export default function PropertyDetail({ params }: { params: Promise<{ id: strin
                                             const res = await fetch('/api/contact-requests', {
                                                 method: 'POST',
                                                 headers: { 'Content-Type': 'application/json' },
+                                                credentials: 'include', // Include cookies for authentication
                                                 body: JSON.stringify({
                                                     receiverId: property.owner._id,
                                                     propertyId: property._id,
