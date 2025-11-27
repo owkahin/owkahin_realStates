@@ -30,7 +30,7 @@ export async function GET() {
   try {
     await dbConnect();
     const properties = await Property.find({})
-      .populate('owner', 'name email')
+      .populate('owner', 'fullName username email profilePic')
       .sort({ createdAt: -1 });
     return NextResponse.json({ success: true, data: properties });
   } catch (error: any) {
