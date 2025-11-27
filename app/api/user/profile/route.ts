@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 import User from '@/models/User';
 import { authenticateToken } from '@/lib/auth';
+import mongoose from 'mongoose';
 
 export async function PUT(req: NextRequest) {
   try {
@@ -32,7 +33,7 @@ export async function PUT(req: NextRequest) {
     // Check if username or email is already taken by another user
     const existingUser = await User.findOne({
       $and: [
-        { _id: { $ne: userId } },
+        { _id: { $ne: new mongoose.Types.ObjectId(userId) } },
         { $or: [{ email }, { username }] }
       ]
     });
