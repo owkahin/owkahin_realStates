@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
-import User from '@/models/User'; // Ensure User model is registered
-import Property from '@/models/Property';
 import { verifyToken } from '@/lib/auth';
+// Import User model BEFORE Property to ensure it's registered first
+import User from '@/models/User';
+import Property from '@/models/Property';
 
 export async function POST(request: NextRequest) {
   try {

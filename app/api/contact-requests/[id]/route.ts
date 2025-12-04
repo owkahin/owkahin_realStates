@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
+import { verifyToken } from '@/lib/auth';
+// Import models in correct order to ensure schemas are registered
+import User from '@/models/User';
+import Property from '@/models/Property';
 import ContactRequest from '@/models/ContactRequest';
 import Conversation from '@/models/Conversation';
-import { verifyToken } from '@/lib/auth';
 
 // Accept or reject contact request
 export async function PUT(
