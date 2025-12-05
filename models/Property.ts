@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
-import User from './User';
+// Ensure User model is registered first
+// This prevents "Schema hasn't been registered for model 'User'" error
+if (!mongoose.models.User) {
+  require('./User');
+}
 
 const PropertySchema = new mongoose.Schema({
   title: {

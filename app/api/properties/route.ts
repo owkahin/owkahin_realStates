@@ -29,12 +29,22 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
+    console.log('🔍 GET /api/properties - Starting request');
     await dbConnect();
+    console.log('✅ Database connected');
+    
+    console.log('📦 Fetching properties...');
     const properties = await Property.find({})
       .populate('owner', 'fullName username email profilePic')
       .sort({ createdAt: -1 });
+    
+    console.log(`✅ Found ${properties.length} properties`);
     return NextResponse.json({ success: true, data: properties });
   } catch (error: any) {
+    console.error('❌ Error in GET /api/properties:', error);
+    console.error('Error name:', error.name);
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
     return NextResponse.json({ success: false, error: error.message }, { status: 400 });
   }
 }
